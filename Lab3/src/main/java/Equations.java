@@ -19,8 +19,8 @@ public class Equations {
         Equation equation2 = new Equation(punchedPoints2, funcInString2, func2);
 
         //третье уравнение
-        Function<Double, Double> func3 = x -> Math.sin(2*x) / x;
-        String funcInString3 = "sin(2x)/x";
+        Function<Double, Double> func3 = x -> Math.sin(x)/x + 2;
+        String funcInString3 = "sinx/x + 2";
         HashMap<Double, Boolean> punchedPoints3 = new HashMap<>();
         punchedPoints3.put(0d, true);
         Equation equation3 = new Equation(punchedPoints3, funcInString3, func3);

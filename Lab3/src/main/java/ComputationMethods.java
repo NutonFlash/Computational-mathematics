@@ -43,9 +43,9 @@ public class ComputationMethods {
         double middleRectanglesErr = getErrorForMiddleRectangles(maxValue);
         double sideRectanglesErr = getErrorForLeftRectangles(maxValue);
         System.out.println("Значения интеграла от функции "+numberOfEquation+" на участке ["+bounds[0]+", "+bounds[1]+"]:");
-        Runnable runnable1 = () -> System.out.println("  методом средних прямоугольников: "+solveByMiddleRectangles(function,bounds,step, stack1) + " (погрешность - "+middleRectanglesErr+")");
-        Runnable runnable2 = () -> System.out.println("  методом левых прямоугольников: "+solveByLeftRectangles(function,bounds,step, stack2) + " (погрешность - "+sideRectanglesErr+")");
-        Runnable runnable3 = () -> System.out.println("  методом правых прямоугольников: "+solveByRightRectangles(function,bounds,step, stack3) + " (погрешность - "+sideRectanglesErr+")");
+        Runnable runnable1 = () -> System.out.println("  методом средних прямоугольников: "+solveByMiddleRectangles(stack1) + " (погрешность - "+middleRectanglesErr+")");
+        Runnable runnable2 = () -> System.out.println("  методом левых прямоугольников: "+solveByLeftRectangles(stack2) + " (погрешность - "+sideRectanglesErr+")");
+        Runnable runnable3 = () -> System.out.println("  методом правых прямоугольников: "+solveByRightRectangles(stack3) + " (погрешность - "+sideRectanglesErr+")");
         Thread thread1 = new Thread(runnable1);
         Thread thread2 = new Thread(runnable2);
         Thread thread3 = new Thread(runnable3);
@@ -58,7 +58,7 @@ public class ComputationMethods {
         System.out.println("Количество итераций: "+ Math.round(Math.abs(bounds[1]-bounds[0]) / step));
     }
 
-    public double solveByMiddleRectangles(Function<Double, Double> function, double[] bounds, double step, Stack<Double> fixedPointStack) {
+    public double solveByMiddleRectangles(Stack<Double> fixedPointStack) {
         double x = bounds[0];
         double result = 0;
         while (x < bounds[1]) {
@@ -75,7 +75,7 @@ public class ComputationMethods {
         return result;
     }
 
-    public double solveByLeftRectangles(Function<Double, Double> function, double[] bounds, double step, Stack<Double> fixedPointStack) {
+    public double solveByLeftRectangles(Stack<Double> fixedPointStack) {
         double x = bounds[0];
         double result = 0;
         while (x < bounds[1]) {
@@ -92,7 +92,7 @@ public class ComputationMethods {
         return result;
     }
 
-    public double solveByRightRectangles(Function<Double, Double> function, double[] bounds, double step, Stack<Double> fixedPointStack) {
+    public double solveByRightRectangles(Stack<Double> fixedPointStack) {
         double x = bounds[0] + step;
         double result = 0;
         while (x <= bounds[1]) {
